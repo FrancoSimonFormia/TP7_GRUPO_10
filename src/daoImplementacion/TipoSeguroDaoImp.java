@@ -9,11 +9,11 @@ import java.util.List;
 import dao.TipoSeguroDao;
 import entidad.TipoSeguro;
 
-public class TipoSeguroDaoImp {
+public class TipoSeguroDaoImp implements TipoSeguroDao {
 	
 	private static final String qrylistartiposeguros = "SELECT idTipo, descripcion FROM tipoSeguros";
 	
-	public static List<TipoSeguro> listarTiposDeSeguros() {
+	public List<TipoSeguro> listarTiposDeSeguros() {
 	    List<TipoSeguro> tiposDeSeguros = new ArrayList<>();
 	    
 
@@ -36,5 +36,6 @@ public class TipoSeguroDaoImp {
 
 	    return tiposDeSeguros;
 	}
+
 
 }

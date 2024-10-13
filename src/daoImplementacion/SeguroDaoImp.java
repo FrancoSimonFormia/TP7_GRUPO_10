@@ -10,11 +10,11 @@ import java.util.List;
 import dao.SeguroDao;
 import entidad.Seguro;
 
-public class SeguroDaoImp {
+public class SeguroDaoImp implements SeguroDao {
 	
 	private static final String qrylistarseguros = "SELECT idSeguro, descripcion, idTipo, costoContratacion, costoAsegurado FROM Seguros";
 	
-	public static List<Seguro> listarSeguros() {
+	public List<Seguro> listarSeguros() {
 		
 	    List<Seguro> seguros = new ArrayList<>();
 
@@ -40,6 +40,41 @@ public class SeguroDaoImp {
 
 	    return seguros;
 	}
+	
+	private static final String qryinsert = "INSERT INTO seguros(idSeguro, descripcion, idTipo, costoContratacion, costoAsegurado) VALUES(?, ?, ?, ?, ?)";
+
+	@Override
+	public boolean insert(Seguro seguro) {
+		PreparedStatement statement;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		boolean isInsertExitoso = false;
+		try
+		{
+			statement = conexion.prepareStatement(qryinsert);
+			statement.setInt(1, seguro.getIdSeguro());
+			statement.setString(2, seguro.getDescripcion());
+			statement.setInt(3, seguro.getIdTipo());
+			statement.setDouble(4, seguro.getCostoContratacion());
+			statement.setDouble(5, seguro.getCostoAsegurado());
+			if(statement.executeUpdate() > 0)
+			{
+				conexion.commit();
+				isInsertExitoso = true;
+			}
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+			try {
+				conexion.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}
+		
+		return isInsertExitoso;
+	}
+
 	
 
 }

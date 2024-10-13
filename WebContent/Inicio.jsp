@@ -8,5 +8,11 @@
 </head>
 <body>
 
+<a href="Inicio.jsp">Inicio</a>
+<a href="AgregarSeguro.jsp"> Agregar Seguro</a>
+<a href="ListarSeguros.jsp"> Listar Seguros</a>
+
+<h1>Soy la página inicio</h1>
+
 </body>
 </html>
