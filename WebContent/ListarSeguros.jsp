@@ -13,8 +13,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	
-	<a href="Inicio.jsp">Inicio</a>
+
+		<a href="Inicio.jsp">Inicio</a>
 	<a href="AgregarSeguro.jsp"> Agregar Seguro</a>
 	<a href="ListarSeguros.jsp"> Listar Seguros</a>
 
@@ -39,7 +39,6 @@
 			
 		listaSeguros = seguroNegocioImp.listarSeguros();
 		 
-		 
 		 if(listaSeguros != null)
 		 {
 			for(Seguro s : listaSeguros)
@@ -56,10 +55,7 @@
 				<%}
 				 	 
 			} %>
-
 	</table>
-	
-
 
 </body>
 </html>
