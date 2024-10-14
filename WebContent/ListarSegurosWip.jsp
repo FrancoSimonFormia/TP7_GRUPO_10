@@ -39,7 +39,6 @@
 			
 		listaSeguros = seguroNegocioImp.listarSeguros();
 		 
-		 
 		 if(listaSeguros != null)
 		 {
 			for(Seguro s : listaSeguros)
@@ -56,7 +55,6 @@
 				<%}
 				 	 
 			} %>
-
 	</table>
 	
 

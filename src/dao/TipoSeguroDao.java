@@ -7,4 +7,6 @@ import entidad.TipoSeguro;
 public interface TipoSeguroDao {
 	
 	List<TipoSeguro> listarTiposDeSeguros();
+	
+	TipoSeguro buscarPorId(int idTipo);
 }

@@ -16,6 +16,13 @@ public class SeguroDaoImp implements SeguroDao {
 	
 	public List<Seguro> listarSeguros() {
 		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		}catch(ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		
 	    List<Seguro> seguros = new ArrayList<>();
 
 	    try (Connection conexion = Conexion.getConexion().getSQLConexion();
@@ -45,6 +52,13 @@ public class SeguroDaoImp implements SeguroDao {
 
 	@Override
 	public boolean insert(Seguro seguro) {
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		}catch(ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
 		boolean isInsertExitoso = false;

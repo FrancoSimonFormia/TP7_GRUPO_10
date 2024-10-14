@@ -17,4 +17,11 @@ public class TipoSeguroNegocioImp implements TipoSeguroNegocio {
 		return tsDao.listarTiposDeSeguros();
 	}
 
+	@Override
+	public TipoSeguro buscarPorId(int idTipo) {
+		
+		return tsDao.buscarPorId(idTipo);
+	}
+	
+
 }

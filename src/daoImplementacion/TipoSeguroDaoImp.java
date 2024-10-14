@@ -12,8 +12,16 @@ import entidad.TipoSeguro;
 public class TipoSeguroDaoImp implements TipoSeguroDao {
 	
 	private static final String qrylistartiposeguros = "SELECT idTipo, descripcion FROM tipoSeguros";
+	private static final String qryBuscarPorId = "SELECT idTipo, descripcion FROM tipoSeguros where idTipo = ?";
 	
 	public List<TipoSeguro> listarTiposDeSeguros() {
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		}catch(ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
 	    List<TipoSeguro> tiposDeSeguros = new ArrayList<>();
 	    
 
@@ -35,6 +43,40 @@ public class TipoSeguroDaoImp implements TipoSeguroDao {
 	    }
 
 	    return tiposDeSeguros;
+	}
+
+	@Override
+	public TipoSeguro buscarPorId(int idTipo) {
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		}catch(ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		TipoSeguro tipoSeguro = null;
+		try {
+			
+			PreparedStatement statement;
+			Connection conexion = Conexion.getConexion().getSQLConexion();
+			statement = conexion.prepareStatement(qryBuscarPorId);
+			statement.setInt(1, idTipo);
+		    ResultSet resultSet = statement.executeQuery();
+
+		        while (resultSet.next()) {
+		            int id = resultSet.getInt("idTipo");
+		            String descripcion = resultSet.getString("descripcion");
+
+		            tipoSeguro = new TipoSeguro(id, descripcion);
+		        }
+
+		    } catch (SQLException e) {
+		        e.printStackTrace(); 
+		    }
+		
+		
+		return tipoSeguro;
+		
 	}
 
 
