@@ -10,6 +10,8 @@ public class TipoSeguro {
 		this.idTipo = idTipo;
 		this.descripcion = descripcion;
 	}
+	
+	public TipoSeguro (){}
 
 	public int getIdTipo() {
 		return idTipo;

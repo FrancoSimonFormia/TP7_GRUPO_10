@@ -12,7 +12,7 @@ import entidad.TipoSeguro;
 public class TipoSeguroDaoImp implements TipoSeguroDao {
 	
 	private static final String qrylistartiposeguros = "SELECT idTipo, descripcion FROM tipoSeguros";
-	private static final String qryBuscarPorId = "SELECT idTipo, descripcion FROM tipoSeguros where idTipo = ?";
+	private static final String qryBuscarPorId = "SELECT idTipo, descripcion FROM tipoSeguros WHERE idTipo = ?";
 	
 	public List<TipoSeguro> listarTiposDeSeguros() {
 		
@@ -63,12 +63,12 @@ public class TipoSeguroDaoImp implements TipoSeguroDao {
 			statement.setInt(1, idTipo);
 		    ResultSet resultSet = statement.executeQuery();
 
-		        while (resultSet.next()) {
-		            int id = resultSet.getInt("idTipo");
-		            String descripcion = resultSet.getString("descripcion");
+		    while (resultSet.next()) {
+	            int id = resultSet.getInt("idTipo");
+	            String descripcion = resultSet.getString("descripcion");
 
-		            tipoSeguro = new TipoSeguro(id, descripcion);
-		        }
+	            tipoSeguro = new TipoSeguro(id, descripcion);
+	        }
 
 		    } catch (SQLException e) {
 		        e.printStackTrace(); 

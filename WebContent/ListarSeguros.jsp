@@ -1,4 +1,3 @@
-<%@page import="negocioImplementacion.SeguroNegocioImp"%>
 <%@page import="entidad.TipoSeguro" %>
 <%@page import="entidad.Seguro" %>
 <%@page import="java.util.List" %>
@@ -33,21 +32,25 @@
 		 </tr>
 		 
 		 <% 
-		 
-		List<Seguro> listaSeguros = null;
-		SeguroNegocioImp seguroNegocioImp = new SeguroNegocioImp();
-			
-		listaSeguros = seguroNegocioImp.listarSeguros();
-		 
-		 if(listaSeguros != null)
-		 {
-			for(Seguro s : listaSeguros)
-				 {%>
+            List<Seguro> listaSeguros = (List<Seguro>) request.getAttribute("listaSeguros");
+            List<TipoSeguro> listaTipos = (List<TipoSeguro>) request.getAttribute("listaTipos");
+            
+            if (listaSeguros != null) {
+                for (Seguro s : listaSeguros) {
+                    String tipoDescripcion = "Tipo de seguro no encontrado";
+                    for (TipoSeguro ts : listaTipos) {
+                        if (ts.getIdTipo() == s.getIdTipo()) {
+                            tipoDescripcion = ts.getDescripcion();
+                            break;
+                        }
+                    }
+        %>
+				 
 			<tr>
 			
 				<td> <%=s.getIdSeguro() %> </td>
 				<td> <%=s.getDescripcion() %> </td>
-				<td> Descripcion del tipo... </td>
+                <td><%= tipoDescripcion %></td>
 				<td> <%=s.getCostoContratacion() %> </td>
 				<td> <%= s.getCostoAsegurado() %></td>
 		
