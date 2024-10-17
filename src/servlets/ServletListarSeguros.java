@@ -1,6 +1,7 @@
 package servlets;
 
 import java.util.List;
+import java.util.ArrayList; // Asegúrate de importar esta clase
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,12 +25,34 @@ public class ServletListarSeguros extends HttpServlet {
         SeguroNegocioImp seguroNegocioImp = new SeguroNegocioImp();
         TipoSeguroNegocioImp tipoSeguroNegocioImp = new TipoSeguroNegocioImp();
         
-        List<Seguro> listaSeguros = seguroNegocioImp.listarSeguros();
-        List<TipoSeguro> listaTipos = tipoSeguroNegocioImp.listarTiposDeSeguros();
+  
+        List<Seguro> listaSeguros = new ArrayList<>();
+        List<TipoSeguro> listaTipos = new ArrayList<>();        
         
-        request.setAttribute("listaSeguros", listaSeguros);
-        request.setAttribute("listaTipos", listaTipos);
+        listaSeguros = seguroNegocioImp.listarSeguros();    
+        listaTipos = tipoSeguroNegocioImp.listarTiposDeSeguros();         
+                      
+        String tipoSeguroSeleccionado = request.getParameter("tipoSeguro");
+        List<Seguro> listaSegurosFiltrados = new ArrayList<>();
+   
+        if (tipoSeguroSeleccionado != null && !tipoSeguroSeleccionado.isEmpty()) {
+            int idTipoSeguro = Integer.parseInt(tipoSeguroSeleccionado);
+            for (Seguro seguro : listaSeguros) {
+                if (seguro.getIdTipo() == idTipoSeguro) {
+                    listaSegurosFiltrados.add(seguro);
+                }
+            }
+        } else {
+            // Si no hay tipo seleccionado, usamos la lista original
+            listaSegurosFiltrados = listaSeguros;
+        }
         
+        
+        
+        request.setAttribute("listaSeguros", listaSegurosFiltrados);
+        
+        request.setAttribute("listaTipos", listaTipos);             
+       
         request.getRequestDispatcher("ListarSeguros.jsp").forward(request, response);
     }
 }

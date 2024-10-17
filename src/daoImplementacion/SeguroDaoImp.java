@@ -15,19 +15,13 @@ public class SeguroDaoImp implements SeguroDao {
 	private static final String qrylistarseguros = "SELECT idSeguro, descripcion, idTipo, costoContratacion, costoAsegurado FROM Seguros";
 	
 	public List<Seguro> listarSeguros() {
-		
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-		}catch(ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		
-		
 	    List<Seguro> seguros = new ArrayList<>();
 
-	    try (Connection conexion = Conexion.getConexion().getSQLConexion();
-	         PreparedStatement statement = conexion.prepareStatement(qrylistarseguros);
-	         ResultSet resultSet = statement.executeQuery()) {
+	    try {
+	     
+	        Connection conn = Conexion.getConexion().getSQLConexion();
+	        PreparedStatement statement = conn.prepareStatement(qrylistarseguros);
+	        ResultSet resultSet = statement.executeQuery();
 
 	        while (resultSet.next()) {
 	            int idSeguro = resultSet.getInt("idSeguro");
@@ -36,13 +30,14 @@ public class SeguroDaoImp implements SeguroDao {
 	            double costoContratacion = resultSet.getDouble("costoContratacion");
 	            double costoAsegurado = resultSet.getDouble("costoAsegurado");
 
-	         
 	            Seguro seguro = new Seguro(idSeguro, descripcion, idTipo, costoContratacion, costoAsegurado);
 	            seguros.add(seguro);
 	        }
 
 	    } catch (SQLException e) {
-	        e.printStackTrace(); 
+	        e.printStackTrace();
+	    } finally {
+	        Conexion.getConexion().cerrarConexion();
 	    }
 
 	    return seguros;
@@ -85,6 +80,10 @@ public class SeguroDaoImp implements SeguroDao {
 				e1.printStackTrace();
 			}
 		}
+		finally {
+	        Conexion.getConexion().cerrarConexion();
+	    }
+
 		
 		return isInsertExitoso;
 	}

@@ -55,4 +55,8 @@ public class Conexion
 		}
 		instancia = null;
 	}
+	
+	
+	
+	
 }

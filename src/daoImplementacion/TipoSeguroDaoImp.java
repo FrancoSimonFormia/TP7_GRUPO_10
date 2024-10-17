@@ -11,17 +11,10 @@ import entidad.TipoSeguro;
 
 public class TipoSeguroDaoImp implements TipoSeguroDao {
 	
-	private static final String qrylistartiposeguros = "SELECT idTipo, descripcion FROM tipoSeguros";
+	private static final String qrylistartiposeguros = "SELECT idTipo, descripcion FROM segurosgroup.tiposeguros;";
 	private static final String qryBuscarPorId = "SELECT idTipo, descripcion FROM tipoSeguros WHERE idTipo = ?";
 	
-	public List<TipoSeguro> listarTiposDeSeguros() {
-		
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-		}catch(ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		
+	public List<TipoSeguro> listarTiposDeSeguros() {		
 	    List<TipoSeguro> tiposDeSeguros = new ArrayList<>();
 	    
 
@@ -41,6 +34,10 @@ public class TipoSeguroDaoImp implements TipoSeguroDao {
 	    } catch (SQLException e) {
 	        e.printStackTrace(); 
 	    }
+	    finally {
+	        Conexion.getConexion().cerrarConexion();
+	    }
+
 
 	    return tiposDeSeguros;
 	}
@@ -72,9 +69,11 @@ public class TipoSeguroDaoImp implements TipoSeguroDao {
 
 		    } catch (SQLException e) {
 		        e.printStackTrace(); 
+		    }finally {
+		        Conexion.getConexion().cerrarConexion();
 		    }
-		
-		
+
+				
 		return tipoSeguro;
 		
 	}
