@@ -25,4 +25,9 @@ public class SeguroNegocioImp implements SeguroNegocio {
 		return sDao.listarSeguros();
 	}
 
+	@Override
+	public int obtenerUltimoID() {
+		return sDao.obtenerUltimoID();
+	}
+
 }

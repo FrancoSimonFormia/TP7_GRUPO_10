@@ -88,6 +88,25 @@ public class SeguroDaoImp implements SeguroDao {
 		return isInsertExitoso;
 	}
 
+	@Override
+	public int obtenerUltimoID() {
+		 int ultimoId = 0;
+		    try {
+		    	Connection conn = Conexion.getConexion().getSQLConexion();
+		    	PreparedStatement statement = conn.prepareStatement("SELECT MAX(idseguro) FROM seguros");
+		        ResultSet resultSet = statement.executeQuery();
+
+		        if (resultSet.next()) {
+		            ultimoId = resultSet.getInt(1);
+		        }
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    } finally {
+		    	Conexion.getConexion().cerrarConexion();
+		    }
+		    return ultimoId;
+		}
+
 	
 
 }

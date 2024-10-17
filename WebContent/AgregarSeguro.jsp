@@ -17,17 +17,18 @@
 <form action="ServletAgregarSeguro" method="post">
     <table>
         <tr>
-            <td><label for="idseguro">ID Seguro:</label></td>
-            <td><input type="text" id="idseguro" name="idseguro"></td>
+            <td><label>ID Seguro:</label></td>
+            <td><label id="idseguro"><%= request.getAttribute("proximoIdSeguro") %></label>
+			<input type="hidden" name="idseguro" value="<%= request.getAttribute("proximoIdSeguro") %>"></td>
         </tr>
 
         <tr>
-            <td><label for="descripcion">Descripción:</label></td>
+            <td><label>Descripción:</label></td>
             <td><input type="text" id="descripcion" name="descripcion"></td>
         </tr>
 
         <tr>
-            <td><label for="tipo">Tipo Seguro:</label></td>
+            <td><label>Tipo Seguro:</label></td>
             <td>
                 <select id="tipo" name="tipo">
                     <% 
@@ -45,22 +46,57 @@
         </tr>
 
         <tr>
-            <td><label for="costoContratacion">Costo Contratación:</label></td>
+            <td><label>Costo Contratación:</label></td>
             <td><input type="text" id="costoContratacion" name="costoContratacion"></td>
         </tr>
 
         <tr>
-            <td><label for="costoMaximo">Costo Máximo Asegurado:</label></td>
+            <td><label>Costo Máximo Asegurado:</label></td>
             <td><input type="text" id="costoMaximo" name="costoMaximo"></td>
         </tr>
 
         <tr>
-            <td colspan="2" style="text-align: center;">
-                <button type="submit">Aceptar</button>
+            <td colspan="2" style="text-align: right;">
+                <button type="submit" id="btnAceptar">Aceptar</button>
             </td>
         </tr>
     </table>
 </form>
+<script>
+    var botonAceptar = document.getElementById("btnAceptar");
+
+    botonAceptar.addEventListener("click", function(event) {
+        if (!validarFormulario()) {
+            event.preventDefault();
+        }
+    });
+
+    function validarFormulario() {
+        var descripcion = document.getElementById("descripcion").value;
+        var costoContratacion = document.getElementById("costoContratacion").value;
+        var costoMaximo = document.getElementById("costoMaximo").value;
+
+        var soloNumeros = /^\d+(\.\d{1,2})?$/;
+
+        if (descripcion === "") {
+            alert("El campo 'Descripción' no puede estar vacío.");
+            return false;
+        }
+
+        if (costoContratacion === "" || !soloNumeros.test(costoContratacion)) {
+            alert("'Costo Contratación' debe ser un número valido.");
+            return false;
+        }
+
+        if (costoMaximo === "" || !soloNumeros.test(costoMaximo)) {
+            alert("'Costo Máximo Asegurado' debe ser un numero válido.");
+            return false;
+        }
+
+        return true;
+    }
+
+</script>
 
 </body>
 </html>

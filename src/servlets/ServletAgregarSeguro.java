@@ -17,22 +17,21 @@ import entidad.TipoSeguro;
 @WebServlet("/ServletAgregarSeguro")
 public class ServletAgregarSeguro extends HttpServlet {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
         
         SeguroNegocioImp seguroNegocioImp = new SeguroNegocioImp();
         TipoSeguroNegocioImp tipoSeguroNegocioImp = new TipoSeguroNegocioImp();
         
-        List<TipoSeguro> listaTipos = new ArrayList<>();        
-               
-        listaTipos = tipoSeguroNegocioImp.listarTiposDeSeguros();         
-                      
-        String tipoSeguroSeleccionado = request.getParameter("tipoSeguro");
+        int proximoIdSeguro = seguroNegocioImp.obtenerUltimoID() + 1;
+
+        List<TipoSeguro> listaTipos = tipoSeguroNegocioImp.listarTiposDeSeguros();         
         
+        request.setAttribute("proximoIdSeguro", proximoIdSeguro);
         request.setAttribute("listaTipos", listaTipos);             
-       
+
         request.getRequestDispatcher("AgregarSeguro.jsp").forward(request, response);
     }
 }
