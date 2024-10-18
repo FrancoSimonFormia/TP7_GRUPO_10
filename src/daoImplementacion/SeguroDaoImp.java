@@ -12,6 +12,8 @@ import entidad.Seguro;
 
 public class SeguroDaoImp implements SeguroDao {
 	
+	public SeguroDaoImp() {};
+	
 	private static final String qrylistarseguros = "SELECT idSeguro, descripcion, idTipo, costoContratacion, costoAsegurado FROM Seguros";
 	
 	public List<Seguro> listarSeguros() {

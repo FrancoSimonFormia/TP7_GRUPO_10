@@ -16,6 +16,8 @@ public class Seguro {
 		this.costoContratacion = costoContratacion;
 		this.costoAsegurado = costoAsegurado;
 	}
+	
+	public Seguro() {}
 
 	public int getIdSeguro() {
 		return idSeguro;

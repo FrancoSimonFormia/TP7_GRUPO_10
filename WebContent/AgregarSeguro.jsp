@@ -1,5 +1,7 @@
 <%@page import="entidad.TipoSeguro" %>
 <%@page import="java.util.List" %>
+<%@page import="entidad.Seguro" %>
+<%@page import="daoImplementacion.SeguroDaoImp" %>
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -14,12 +16,12 @@
 
 <h1>Agregar Seguro</h1>
 
-<form action="ServletAgregarSeguro" method="post">
+<form action="ServletAgregarSeguro" method="get">
     <table>
         <tr>
             <td><label>ID Seguro:</label></td>
             <td><label id="idseguro"><%= request.getAttribute("proximoIdSeguro") %></label>
-			<input type="hidden" name="idseguro" value="<%= request.getAttribute("proximoIdSeguro") %>"></td>
+			<input id="ids" type="hidden" name="idseguro" value="<%= request.getAttribute("proximoIdSeguro") %>"></td>
         </tr>
 
         <tr>
@@ -62,6 +64,7 @@
         </tr>
     </table>
 </form>
+
 <script>
     var botonAceptar = document.getElementById("btnAceptar");
 
@@ -69,6 +72,7 @@
         if (!validarFormulario()) {
             event.preventDefault();
         }
+        else alert("Seguro agregado con éxito!");
     });
 
     function validarFormulario() {
