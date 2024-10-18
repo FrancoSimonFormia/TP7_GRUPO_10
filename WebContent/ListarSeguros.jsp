@@ -16,8 +16,8 @@
     <a href="ListarSeguros.jsp">Listar Seguros</a>
 
     <h3>"Tipo de seguros de la base de datos"</h3>
-
-    <form action="ServletListarSeguros" method="get">
+    
+   <form action="ServletListarSeguros" method="get">
         <label for="tipoSeguro">Búsqueda por tipo de seguro:</label>
         <select id="tipoSeguro" name="tipoSeguro">
             <% 
@@ -33,7 +33,8 @@
         </select>       
         <button type="submit">Filtrar</button>
     </form>
-    
+
+
     <table border="1">
         <tr>
             <th>ID Seguro</th> 

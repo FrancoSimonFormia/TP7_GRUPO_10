@@ -13,6 +13,9 @@
     <title>Agregar Seguro</title>
 </head>
 <body>
+    <a href="Inicio.jsp">Inicio</a>
+    <a href="AgregarSeguro.jsp">Agregar Seguro</a>
+    <a href="ListarSeguros.jsp">Listar Seguros</a>
 
 <h1>Agregar Seguro</h1>
 
@@ -86,11 +89,22 @@
             alert("El campo 'Descripción' no puede estar vacío.");
             return false;
         }
+        
+        if (costoContratacion < 0 || costoMaximo < 0){
+        	alert("No puede ingresar valores de costos negativos");
+        	return false;
+        }
 
         if (costoContratacion === "" || !soloNumeros.test(costoContratacion)) {
             alert("'Costo Contratación' debe ser un número valido.");
             return false;
         }
+        
+        if (costoContratacion > costoMaximo){
+        	alert("'Costo Contratación' no puede ser mayor al 'Costo Máximo Asegurado'");
+        	return false;
+        }
+        
 
         if (costoMaximo === "" || !soloNumeros.test(costoMaximo)) {
             alert("'Costo Máximo Asegurado' debe ser un numero válido.");
