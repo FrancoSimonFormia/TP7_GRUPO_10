@@ -1,7 +1,6 @@
 package servlets;
 
 import java.util.List;
-import java.util.ArrayList; // Asegúrate de importar esta clase
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
