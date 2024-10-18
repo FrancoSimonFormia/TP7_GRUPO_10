@@ -11,9 +11,9 @@
     <title>Listar Seguros</title>
 </head>
 <body>
-    <a href="Inicio.jsp">Inicio</a>
-    <a href="AgregarSeguro.jsp">Agregar Seguro</a>
-    <a href="ListarSeguros.jsp">Listar Seguros</a>
+<a href="Inicio.jsp">Inicio</a>
+<a href="ServletAgregarSeguro">Agregar Seguro</a>
+<a href="ServletListarSeguros"> Listar Seguros</a>
 
     <h3>"Tipo de seguros de la base de datos"</h3>
     
